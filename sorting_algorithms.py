@@ -5,8 +5,8 @@ import sys, random, copy
 File containing sorting algorithms and evaluation functions
 Mergesort
 Quicksort
-Lomuto Quicksort
-Hoare Quicksort
+    Lomuto Quicksort
+    Hoare Quicksort
 Insertion Sort
 Heapsort
 Selection Sort
@@ -558,6 +558,9 @@ def evaluate_all(n, k, num, functions: list, unsort_shuffling = True, partial_so
     print()
 
 def evalautescale():
+    '''
+    evaluates a set of defined functions within this function
+    '''
     # implement failsafes if list sizes too big for On^2
     parameters = [(100, 20),
                   (1000, 200),
@@ -615,10 +618,10 @@ def sorting_runtime_comparison(size, duplicates, sorted: bool, \
     print()
 #endregion
 
+# testing runtime of functions within file
 if __name__ == "__main__":
     sys.setrecursionlimit(2500)
     # sorting_runtime_comparison(1000, 200, False, 2500, rseed=10)
-    #print(evaluate(100, 20, 10000, Lomuto_Quicksort))
     functs = [ Heapsort, Mergesort, \
                  BU_Mergesort, Hoare_Quicksort, Lomuto_Quicksort, bingus_sort]
     #evaluate_all(6000, 100, 25, functs)

@@ -1,27 +1,26 @@
 '''
 Modified code from https://www.geeksforgeeks.org/python-program-multiply-two-matrices/
 '''
-# Program to multiply two matrices using list comprehension
- 
-def matrix_multiplication():
-    # take a 3x3 matrix
-    A = [[12, 7, 3],
-        [4, 5, 6],
-        [7, 8, 9]]
-    
-    # take a 3x4 matrix
-    B = [[5, 8, 1, 2],
-        [6, 7, 3, 0],
-        [4, 5, 9, 1]]
-    
+import random
+# Program to multiply two matrices of NxN size using list comprehension
+def matrix_multi_simple(size, range_limit = 50):
+    '''
+    In matrix multiplication, each value is mapped to a corresponding value of the other matrix.\n
+    This program simplifies choosing the colunms and rows of the matrix by making it NxN for 2 matricies.\n
+    Naive progam makes complexity to N^3.
+    '''
+    # create matrix a and b from arguments
+    a_matrix = [[random.randint(1, range_limit) for i in range(size)] for x in range(size)]
+    b_matrix = [[random.randint(1, range_limit)  for i in range(size)] for x in range(size)]
     # result will be 3x4
     result = [[sum(a * b for a, b in zip(A_row, B_col)) 
-                            for B_col in zip(*B)]
-                                    for A_row in A]
-    
-    for r in result:
-        print(r)
+                            for B_col in zip(*b_matrix)]
+                                    for A_row in a_matrix]
+    return result
 
 if __name__ == "__main__":
-    pass
-    #matrix_multiplication()
+    result = matrix_multi_simple(5, 5)
+    print(result)
+    for r in result:
+        print(r)
+    
