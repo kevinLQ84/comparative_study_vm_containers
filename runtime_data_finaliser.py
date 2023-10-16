@@ -8,7 +8,7 @@ Consideration of output values:
     - mode, may be difficult due to highly variable exeution time
     - range, highest execution time and lowest execution time
 '''
-from json_functs import create_json
+from json_functs import create_json, convert_json_to_dict
 import json
 import matplotlib.pyplot as plt
 
@@ -21,9 +21,7 @@ def process_json(filename: str, *args, **kwargs) -> dict:
     '''
     results_dict = {}
 
-    # assume filename goven is a JSON file
-    with open(filename, 'r') as openfile:
-        raw_json_file: dict = json.load(openfile)
+    raw_json_file:dict = convert_json_to_dict(filename)
         # eg {funct: [{input: time, input2: time2}, {input: time, input2: time}]}
 
     # if multiple sets of runtimes used, they should be automatically averaged
@@ -95,6 +93,7 @@ def graph_generate(results: dict, *args, **kwargs) -> None:
     plt.show() 
                 
 if __name__ == '__main__':
-    print(graph_generate(process_json('data.json'), average_all_results = False))
+    # print(graph_generate(process_json('data.json')))
+    graph_generate(convert_json_to_dict('avg_data2.json'))
 
 

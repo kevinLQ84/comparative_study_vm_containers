@@ -20,5 +20,14 @@ def create_json(dictionary: dict, *args, **kwargs) -> None:
     with open(filename, 'w') as output_file:
         output_file.write(json_file)
 
+def convert_json_to_dict(filename: str):
+    '''
+    Convert a JSON file to dict.
+    '''
+    # assume filename given is a JSON file
+    with open(filename, 'r') as openfile:
+        raw_json_file: dict = json.load(openfile)
+    return raw_json_file
+
 if __name__ == '__main__':
     pass
