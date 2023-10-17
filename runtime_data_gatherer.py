@@ -6,7 +6,6 @@ execution output should be placed in a folder in JSON formatting
 from json_functs import create_json
 from test_runtime import time_test
 from matrix_multiplication import matrix_multi_simple
-import json
 
 def run_functions(*args, **kwargs) -> dict:
     '''

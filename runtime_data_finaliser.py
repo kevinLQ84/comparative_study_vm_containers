@@ -9,14 +9,13 @@ Consideration of output values:
     - range, highest execution time and lowest execution time
 '''
 from json_functs import create_json, convert_json_to_dict
-import json
 import matplotlib.pyplot as plt
 
 def process_json(filename: str, *args, **kwargs) -> dict:
     '''
     Read a file and assume it is JSON.\n
     It can either average the results or not.\n
-    Return the file as a processed version.\n
+    Return the file as a processed dict.\n
     kwargs are average_all_results.
     '''
     results_dict = {}
@@ -71,29 +70,37 @@ def graph_generate(results: dict, *args, **kwargs) -> None:
     Generate a graph based on a JSON file containing runtime data.
     Return the dictionary used to produce the graph
     '''
+    # ensure results are a json file
+    if type(results) == str:
+        results: dict = convert_json_to_dict(results)
+
     plt.rcParams.update({'font.size': 5})
-    # get x axis and y axis values
-    x = [] # inputs
-    y = [] # time taken
+    colors = ['b','r','g','c','m','y','k']
     functions = [i for i in results.keys()] 
-    for funct in functions:
-        for input in results[funct].keys():
+    for i in range(len(functions)):
+        # get x axis and y axis values
+        x = [] # inputs
+        y = [] # time taken
+        for input in results[functions[i]].keys():
             x.append(input)
-            y.append(results[funct][input])
-    # print(x, y)
+            y.append(results[functions[i]][input])
+        line_color = colors[i]
     
-        # generate the graph
+        # generate the graph line
         plt.plot(x, y, \
-                 label = f'{funct}', marker='o', markerfacecolor='blue', markersize=5) 
-        plt.xlabel('matrix size (NxN)') 
-        plt.ylabel('time (seconds)') 
-    
+                 label = f'{functions[i]}', \
+                 marker='o', color=line_color, markerfacecolor=line_color, markersize=5) 
+
     plt.title('Function Runtime')
+    plt.xlabel('matrix size (NxN)') 
+    plt.ylabel('time (seconds)') 
     plt.legend()  
     plt.show() 
-                
+
+
 if __name__ == '__main__':
     # print(graph_generate(process_json('data.json')))
-    graph_generate(convert_json_to_dict('avg_data2.json'))
+    # graph_generate(convert_json_to_dict('avg_data2.json'))
+    graph_generate(convert_json_to_dict('avg_data_on_h_l_d.json'))
 
 

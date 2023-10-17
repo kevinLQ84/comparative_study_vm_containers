@@ -1,0 +1,6 @@
+# ignore results folders and __pycache__
+3.8 hardware_results
+3.11 hardware_results
+container results
+linux vm results
+__pycache__
